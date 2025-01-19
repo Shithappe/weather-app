@@ -107,9 +107,6 @@ function getCurrentLocation() {
 
     <!-- Выбранное местоположение -->
     <el-card v-if="selectedLocation" class="mt-4">
-      <template #header>
-        <div class="font-bold">Выбранное местоположение</div>
-      </template>
       <p class="mb-2">{{ selectedLocation.display_name }}</p>
       <el-tag type="info" class="w-full text-center">
         Координаты: {{ selectedLocation.lat }}, {{ selectedLocation.lon }}
