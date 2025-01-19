@@ -4,6 +4,15 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss'
   ],
 
+  // runtimeConfig: {
+  //   weatherKey: process.env.WEATHER_API, 
+  // },
+  runtimeConfig: {
+    public: {
+      weatherKey: process.env.WEATHER_API,
+    },
+  },
+
   app: {
     layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
