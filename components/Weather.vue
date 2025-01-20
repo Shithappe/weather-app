@@ -2,7 +2,6 @@
 import { useWeather } from '@/composables/useWeather'
 import { onMounted, watch } from 'vue'
 import CurrentForecast from '~/components/CurrentForecast.vue'
-import LineChart from '~/components/LineChart.vue'
 import WeeklyForecast from '~/components/WeeklyForecast.vue'
 
 const props = defineProps(['location'])

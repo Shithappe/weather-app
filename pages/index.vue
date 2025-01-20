@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import SearchCity from '~/components/SearchCity.vue'
-import Weather from '~/components/Weather.vue'
+
 
 const selectedLocation = ref(null)
 

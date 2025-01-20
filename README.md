@@ -2,8 +2,8 @@
 
 A modern weather application built with Nuxt 3 that provides detailed weather information and location search functionality. The application displays current weather conditions, hourly forecasts, and weekly forecasts for locations worldwide.
 
-## Live Demo
-[Link](https://weather-app-ten-gules-59.vercel.app/)
+- [Live Demo](https://weather-app-ten-gules-59.vercel.app/)
+- [Demo](https://drive.google.com/file/d/1ILV3OU4s50k72MOoHeGx43v6J6aC6HGd/view?usp=sharing)
 
 ## Features
 
