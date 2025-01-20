@@ -1,75 +1,120 @@
-# Nuxt Minimal Starter
+# Weather Application
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modern weather application built with Nuxt 3 that provides detailed weather information and location search functionality. The application displays current weather conditions, hourly forecasts, and weekly forecasts for locations worldwide.
+
+## Features
+
+- Location search with autocomplete
+- Current weather display including:
+  - Temperature and "feels like" temperature
+  - Weather conditions description
+  - Clothing recommendations based on weather
+  - Key meteorological data (wind speed, humidity, visibility, pressure, dew point)
+- Hourly weather forecast
+- Weekly weather forecast
+- Responsive design
+- Geolocation support
+
+## Tech Stack
+
+- **Frontend Framework**: Nuxt 3
+- **Location Services**: Nominatim API for geocoding and location search
+- **Weather Data**: OpenWeatherMap API for weather information
+- **AI Integration**: GROQ for intelligent weather analysis and recommendations
+
+## API Integration
+
+### Nominatim
+- Used for geocoding and reverse geocoding
+- Provides location search with coordinates (format: latitude, longitude)
+
+### OpenWeatherMap
+- Provides comprehensive weather data including:
+  - Current conditions
+  - Temperature
+  - Humidity
+  - Wind speed
+  - Visibility
+  - Atmospheric pressure
+  - Dew point
+
+### GROQ
+- Processes weather data to provide intelligent clothing recommendations
+- Analyzes weather conditions to provide user-friendly descriptions
+- Generates context-aware weather advisories
+
+## Environment Variables
+
+```bash
+WEATHER_API=
+GROQ_API_KEY=
+```
 
 ## Setup
 
-Make sure to install dependencies:
-
+1. Clone the repository
 ```bash
-# npm
+git clone <repository-url>
+```
+
+2. Install dependencies
+```bash
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+3. Rename .env.example file with required API keys
 
-Start the development server on `http://localhost:3000`:
-
+4. Run development server
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
+## Build
 
 ```bash
-# npm
+# Build for production
 npm run build
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
+# Preview production build
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Project Structure
+
+```
+├── components/
+│   ├── Weather/
+│   │   ├── Current.vue
+│   │   ├── Hourly.vue
+│   │   └── Weekly.vue
+│   └── Search/
+│       └── Location.vue
+├── composables/
+│   ├── useWeather.ts
+│   ├── useLocation.ts
+│   └── useRecommendations.ts
+├── server/
+│   └── api/
+│       ├── weather.ts
+│       └── location.ts
+├── types/
+└── utils/
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+## License
+
+MIT
+
+## Acknowledgments
+
+- OpenWeatherMap for weather data
+- Nominatim for location services
+- GROQ for AI-powered recommendations
