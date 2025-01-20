@@ -2,6 +2,9 @@
 
 A modern weather application built with Nuxt 3 that provides detailed weather information and location search functionality. The application displays current weather conditions, hourly forecasts, and weekly forecasts for locations worldwide.
 
+## Live Demo
+[Link](https://weather-app-ten-gules-59.vercel.app/)
+
 ## Features
 
 - Location search with autocomplete
@@ -77,28 +80,6 @@ npm run build
 
 # Preview production build
 npm run preview
-```
-
-## Project Structure
-
-```
-├── components/
-│   ├── Weather/
-│   │   ├── Current.vue
-│   │   ├── Hourly.vue
-│   │   └── Weekly.vue
-│   └── Search/
-│       └── Location.vue
-├── composables/
-│   ├── useWeather.ts
-│   ├── useLocation.ts
-│   └── useRecommendations.ts
-├── server/
-│   └── api/
-│       ├── weather.ts
-│       └── location.ts
-├── types/
-└── utils/
 ```
 
 ## Contributing
