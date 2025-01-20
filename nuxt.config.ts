@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       weatherKey: process.env.WEATHER_API,
+      qroqKey: process.env.GROQ_API_KEY,
     },
   },
 

@@ -14,7 +14,6 @@ function handleLocationSelected(location) {
 
 <template>
   <div>
-    <pre>{{ selectedLocation }}</pre>
     <SearchCity @locationSelected="handleLocationSelected" />
     <Weather v-if="selectedLocation" :location="selectedLocation" />
   </div>

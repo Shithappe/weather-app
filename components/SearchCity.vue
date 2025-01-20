@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { Location, Position, Star, StarFilled } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 
-const emit = defineEmits(['selectedLocation']);
+const emit = defineEmits(['locationSelected'])
 
 const searchQuery = ref('')
 const selectedLocation = ref(null)
@@ -18,41 +18,37 @@ onMounted(() => {
   if (process.client) {
     const savedSettings = localStorage.getItem('weatherAppSettings')
     if (savedSettings) {
-      settings.value = JSON.parse(savedSettings)
-      savedCities.value = settings.value.savedCities || []
+      const parsedSettings = JSON.parse(savedSettings)
+      settings.value.isDark = parsedSettings.isDark || settings.value.isDark
+      settings.value.unit = parsedSettings.unit || settings.value.unit
+      savedCities.value = parsedSettings.savedCities || []
     }
   }
 })
 
-// Функция сохранения города в избранное
 function toggleFavorite(city) {
   const cityIndex = savedCities.value.findIndex(
     saved => saved.lat === city.lat && saved.lon === city.lon
   )
   
   if (cityIndex === -1) {
-    // Добавляем город в избранное
     savedCities.value.push(city)
     ElMessage.success('Город добавлен в избранное')
   } else {
-    // Удаляем город из избранного
     savedCities.value.splice(cityIndex, 1)
     ElMessage.success('Город удален из избранного')
   }
   
-  // Сохраняем обновленный список, сохраняя остальные настройки
   settings.value.savedCities = savedCities.value
   localStorage.setItem('weatherAppSettings', JSON.stringify(settings.value))
 }
 
-// Проверка, находится ли город в избранном
 function isCityFavorite(city) {
   return savedCities.value.some(
     saved => saved.lat === city.lat && saved.lon === city.lon
   )
 }
 
-// Функция выбора сохраненного города
 function selectSavedCity(city) {
   selectedLocation.value = city
   searchQuery.value = city.display_name
@@ -70,6 +66,11 @@ async function searchCities(query, callback) {
       `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
     )
     const data = await response.json()
+    if (!Array.isArray(data)) {
+      console.error('Некорректный формат данных:', data)
+      callback([])
+      return
+    }
     callback(data)
   } catch (error) {
     console.error('Ошибка при поиске городов:', error)
@@ -84,7 +85,7 @@ function handleSelect(city) {
     lat: city.lat,
     lon: city.lon
   }
-  emit('locationSelected', selectedLocation.value)
+  emit('locationSelected', city)
 }
 
 function getCurrentLocation() {
@@ -128,7 +129,8 @@ function getCurrentLocation() {
   <div class="w-full mb-4">
     <div class="flex items-center space-x-4">
       <el-autocomplete
-        v-model="searchQuery"
+        :model-value="searchQuery"
+        @update:modelValue="searchQuery = $event"
         :fetch-suggestions="searchCities"
         :trigger-on-focus="false"
         placeholder="Введите название города"
@@ -153,13 +155,11 @@ function getCurrentLocation() {
         class="flex-shrink-0"
       >
         <template #icon>
-          <!-- <el-icon><Location /></el-icon> -->
           <el-icon><Position /></el-icon>
         </template>
       </el-button>
     </div>
 
-    <!-- Сохранённые города -->
     <div v-if="savedCities.length > 0" class="mt-4">
       <div class="flex">
         <el-button
@@ -175,8 +175,7 @@ function getCurrentLocation() {
       </div>
     </div>
 
-    <!-- Выбранное местоположение -->
-    <el-card v-if="selectedLocation" class="mt-4">
+    <el-card v-if="selectedLocation" class="mt-4" shadow="hover">
       <div class="flex items-center justify-between">
         <p class="flex-grow">{{ selectedLocation.display_name }}</p>
         <el-icon
